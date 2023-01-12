@@ -1,12 +1,12 @@
 # ORIGINAL FILE FROM https://github.com/macBerlin/macOS_erase/blob/main/macOS_erase_Monterey
-# THIS WAS CHANGED TO WORK WITH 12.6.1
+# THIS WAS CHANGED TO WORK WITH ALL VRESIONS: BIG SUR, MONTEREY, VENTURA
 # NO WARRANTY OR HELP FROM ME
+
+
 
 # ----------------
 # SETUP
 # ----------------
-
-
 
 #
 # BIG SUR
@@ -15,16 +15,12 @@
 bigSurVersion="11.7.2"
 bigSurLink="https://swcdn.apple.com/content/downloads/36/35/032-12833-A_767J3FVTQ1/27g8em98uo6ghra4newzc7lkhd4ek0u0xm/InstallAssistant.pkg"
 
-
-
 #
 # MONTEREY
 # get it from https://mrmacintosh.com/macos-12-monterey-full-installer-database-download-directly-from-apple/
 #
 montereyVersion="12.6.2"
 montereyLink="https://swcdn.apple.com/content/downloads/55/35/032-12843-A_35UCTHBNLI/z1twfbx3mhypq6g7ljtz52z6nsv0n7e4o5/InstallAssistant.pkg"
-
-
 
 #
 # VENTURA
