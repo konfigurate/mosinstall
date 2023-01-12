@@ -1,0 +1,278 @@
+# ORIGINAL FILE FROM https://github.com/macBerlin/macOS_erase/blob/main/macOS_erase_Monterey
+# THIS WAS CHANGED TO WORK WITH 12.6.1
+# NO WARRANTY OR HELP FROM ME
+
+# ----------------
+# SETUP
+# ----------------
+
+
+
+#
+# BIG SUR
+# get it from https://mrmacintosh.com/macos-big-sur-full-installer-database-download-directly-from-apple/
+#
+bigSurVersion="11.7.2"
+bigSurLink="https://swcdn.apple.com/content/downloads/36/35/032-12833-A_767J3FVTQ1/27g8em98uo6ghra4newzc7lkhd4ek0u0xm/InstallAssistant.pkg"
+
+
+
+#
+# MONTEREY
+# get it from https://mrmacintosh.com/macos-12-monterey-full-installer-database-download-directly-from-apple/
+#
+montereyVersion="12.6.2"
+montereyLink="https://swcdn.apple.com/content/downloads/55/35/032-12843-A_35UCTHBNLI/z1twfbx3mhypq6g7ljtz52z6nsv0n7e4o5/InstallAssistant.pkg"
+
+
+
+#
+# VENTURA
+# get from https://mrmacintosh.com/macos-ventura-13-full-installer-database-download-directly-from-apple/
+#
+venturaVersion="13.1"
+venturaLink="https://swcdn.apple.com/content/downloads/30/37/012-60271-A_QUUGE8KIJ8/yp0xtj55orcpxszdtd13xjhujppspsztj3/InstallAssistant.pkg"
+
+
+
+#
+# COLORS
+#
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'  
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+
+
+function printInfo() {
+
+    #
+    # print info for user when starting
+    #
+
+    echo
+    echo -e "${RED}[INFO]: This script can remove all data on your computer!${NC}"
+    echo -e "${RED}[INFO]: Press CTRL-Z to cancel this process anytime!${NC}"
+    echo -e "${GREEN}[INFO]:${NC} Starting processes ..."
+
+}
+
+
+
+function eraseDisk() {
+
+    #
+    # Asks if drive should be deleted, does so if "Yy" was typed
+    # checks erased disks
+    #
+
+    if [[ -d '/Volumes/Untitled' ]]; then      
+        diskPath='/Volumes/Untitled'
+        diskName="Untitled"
+    fi
+
+    if [[ -d '/Volumes/Macintosh HD' ]]; then
+        diskPath='/Volumes/Macintosh HD'
+        diskName="Macintosh HD"
+    fi
+
+    echo -e "${GREEN}[INFO]:${NC} Destination disk is: ${diskPath}"
+    echo
+    echo -e "${RED}[CHOICE]: Do you want to delete all data on this computer? (y/n)${NC}"
+    read answer < /dev/tty
+    echo
+    
+    if [ "$answer" != "${answer#[Yy]}" ];then
+
+        echo -e "${GREEN}[INFO]:${NC} Ckecking Volumes ..."
+        internalDisk=$(diskutil list | grep "synthesized" | awk -F " " {'print $1'} | awk -F "/" {'print $3'} | head -1)
+        echo -e "${GREEN}[INFO]:${NC} APFS synthesized disk is: ${internalDisk}"
+        DSK_MACINTOSH_HD=$(diskutil list $internalDisk | grep -i "${diskName}" |  grep -vi "data" | awk {'print $NF'} )
+        echo -e "${GREEN}[INFO]:${NC} APFS Macintosh HD disk is: ${DSK_MACINTOSH_HD}"
+        DSK_MACINTOSH_HD_DATA=$(diskutil list $internalDisk | grep -i "DATA" | awk {'print $NF'})
+        
+        if [ -z "$DSK_MACINTOSH_HD_DATA" ];then
+            echo -e "${GREEN}[INFO]:${NC} APFS Data HD not found. Skipping."
+        else
+            echo -e "${GREEN}[INFO]:${NC} APFS Data HD disk is: ${DSK_MACINTOSH_HD_DATA}"
+            umount -f /dev/${DSK_MACINTOSH_HD_DATA} /dev/null &> /dev/null
+            echo -e "${GREEN}[INFO]:${NC} Deleting Data partition ..."
+            diskutil apfs deleteVolume ${DSK_MACINTOSH_HD_DATA} &> /dev/null
+        fi
+
+        # erase volume, create new on called "Macintish HD"
+        echo -e "${GREEN}[INFO]:${NC} Deleting Macintosh HD ..."
+        diskutil apfs eraseVolume ${DSK_MACINTOSH_HD} -name "Macintosh HD" &> /dev/null
+        diskPath='/Volumes/Macintosh HD'
+        diskName='Macintosh HD'
+        diskutil mount /dev/${DSK_MACINTOSH_HD} &> /dev/null
+
+        if [[ $? -ne 0 ]]; then
+            echo -e "${RED}[ERROR]:${NC} Error mounting Macintosh HD."
+            echo -e "${RED}[ERROR]:${NC} Please delete the volume yourself."
+            echo -e "${RED}[ERROR]:${NC} Exiting."
+            exit
+        fi
+    else
+        echo -e "${GREEN}[INFO]:${NC} Skipping disk deletion."
+    fi
+
+}
+
+
+
+function downloadInstaller() {
+
+    #
+    # creates a Folder in /private/tmp
+    # asks what macOS should be installed
+    # downloads the installer
+    #
+
+    echo -e "${GREEN}[INFO]:${NC} Set up folder ..."
+    # rm -rf "${diskPath}"/private/tmp/* >/dev/null 2>&1 ### This would delete manually downlaoded Installers ...
+    mkdir -p "${diskPath}"/private/tmp
+    cd "${diskPath}/private/tmp/"
+
+    echo
+    echo -e "${GREEN}[CHOICE]:${NC} Choose your macOS Version"
+    echo
+    echo -e "\t1. macOS Big Sur\t${bigSurVersion}"
+    echo -e "\t2. macOS Monterey\t${montereyVersion}"
+    echo -e "\t3. macOS Ventura\t${venturaVersion}"
+    echo
+    echo -e "${GREEN}[CHOICE]: Enter a number (1/2/3)${NC}"
+    read answer < /dev/tty
+    echo
+
+    case $answer in
+    
+        "1" )
+            macOSName="Big Sur"
+            macOSVersion=${bigSurVersion}
+            macOSUrl=${bigSurLink}
+            ;;
+
+        "2" )
+            macOSName="Monterey"
+            macOSVersion=${montereyVersion}
+            macOSUrl=${montereyLink}
+            ;;
+        
+        "3" )
+            macOSName="Ventura"
+            macOSVersion=${venturaVersion}
+            macOSUrl=${venturaLink}
+            ;;
+        
+        * )
+            echo -e "${RED}[INFO]:${NC} Nothing selected, exiting now ..."
+            exit
+            ;;
+
+    esac
+
+    echo -e "${GREEN}[INFO]:${NC} You chose macOS ${macOSName} ${macOSVersion}"
+
+    if [[ -f "InstallAssistant.pkg" ]]; then
+        echo -e "${GREEN}[INFO]:${NC} InstallAssistant.pkg found, use that one? (Y/n)"
+        read useIA < /dev/tty
+
+        case $useIA in
+            [Yy]* )
+                echo -e "${GREEN}[INFO]:${NC} Using predownloaded Installer."
+                return
+                ;;
+            
+            [Nn]* )
+                echo -e "${GREEN}[INFO]:${NC} Deleting ..."
+                rm InstallAssistant.pkg >/dev/null 2>&1
+                ;;
+            
+            * )
+                echo -e "${GREEN}[INFO]:${NC} Invalid input, exiting ..."
+                exit
+                ;;
+        esac
+    fi 
+
+    echo
+    echo -e "${GREEN}[INFO]:${NC} Downloading files from Apple ..."
+    curl -L --progress-bar  -f -o InstallAssistant.pkg ${macOSUrl}
+    
+    if [[ $? -eq 0 ]]; then
+        echo -e "${GREEN}[INFO]:${NC} Download finished."
+    else 
+        echo -e "${RED}[ERROR]:${NC} Download failed. Exiting now!"
+        exit
+    fi
+
+}
+
+
+
+function expandAndSet() {
+
+    #
+    # Moving files to set up the InstallAssistant
+    #
+
+    echo -e "${GREEN}[INFO]:${NC} Expanding Installer ..."
+    pkgutil --expand-full InstallAssistant.pkg Source
+    echo -e "${GREEN}[INFO]:${NC} Copying in place ..."
+    cp -R Source/Payload/Applications/"Install macOS ${macOSName}.app" "${diskPath}"/private/tmp/ &>/dev/null
+    
+    echo -e "${GREEN}[INFO]:${NC} Changing permissions ..."
+    SSPATH="Install macOS ${macOSName}.app/Contents/SharedSupport"
+    mkdir -p "$SSPATH"
+    /bin/chmod 0755 "$SSPATH"
+    mv InstallAssistant.pkg "$SSPATH"/SharedSupport.dmg
+    /bin/chmod 0644 "$SSPATH"/SharedSupport.dmg
+    /usr/sbin/chown -R root:wheel "$SSPATH"/SharedSupport.dmg
+    /usr/bin/chflags -h norestricted "$SSPATH"/SharedSupport.dmg
+
+    echo -e "${GREEN}[INFO]:${NC} Cleanup ..."
+    rm -rf Source
+    rm -rf InstallAssistant.pkg
+    echo -e "${GREEN}[INFO]:${NC} Prerequisites done."
+
+}
+
+
+
+function unmountExternalDisks() {
+
+    #
+    # will check for external media and will unmount them before installation
+    #
+    
+    echo -e "${GREEN}[INFO]:${NC} Looking for external drives and unmounting ..."
+    externalDisk=$(diskutil list | grep external | awk -F " " {'print $1'})
+    diskutil umountDisk $externalDisk 2> /dev/null
+
+}
+
+
+
+function main() {
+
+    #
+    # main runner
+    #
+    
+    printInfo
+    eraseDisk
+    
+    sleep 1
+
+    downloadInstaller
+    expandAndSet
+    unmountExternalDisks
+
+    echo -e "${GREEN}[INFO]:${NC} Starting installer ..."
+    "${diskPath}/private/tmp/Install macOS ${macOSName}.app"/Contents/MacOS/InstallAssistant_springboard >/dev/null
+
+}
+
+main
