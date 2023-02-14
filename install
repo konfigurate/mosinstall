@@ -12,30 +12,21 @@
 # BIG SUR
 # get it from https://mrmacintosh.com/macos-big-sur-full-installer-database-download-directly-from-apple/
 #
-bigSurVersion="11.7.3"
-bigSurLink="https://swcdn.apple.com/content/downloads/42/51/032-33756-A_AESP8TG5IZ/etbmyyij5yv83bsn0os00qz6dc92zykvog/InstallAssistant.pkg"
-
-bigsur=("1" "Big Sur" "11.7.3" "https://swcdn.apple.com/content/downloads/42/51/032-33756-A_AESP8TG5IZ/etbmyyij5yv83bsn0os00qz6dc92zykvog/InstallAssistant.pkg")
+bigsur=("Big Sur" "11.7.3" "https://swcdn.apple.com/content/downloads/42/51/032-33756-A_AESP8TG5IZ/etbmyyij5yv83bsn0os00qz6dc92zykvog/InstallAssistant.pkg")
 
 #
 # MONTEREY
 # get it from https://mrmacintosh.com/macos-12-monterey-full-installer-database-download-directly-from-apple/
 #
-montereyVersion="12.6.3"
-montereyLink="https://swcdn.apple.com/content/downloads/17/14/032-33828-A_KX25OQBX8S/lz9yip4rmenyju8nkv4wpaqtdmvzfogkcb/InstallAssistant.pkg"
-
-monterey=("2" "Monterey" "12.6.3" "https://swcdn.apple.com/content/downloads/17/14/032-33828-A_KX25OQBX8S/lz9yip4rmenyju8nkv4wpaqtdmvzfogkcb/InstallAssistant.pkg")
-monterey1262=("4" "Monterey" "12.6.2" "https://swcdn.apple.com/content/downloads/55/35/032-12843-A_35UCTHBNLI/z1twfbx3mhypq6g7ljtz52z6nsv0n7e4o5/InstallAssistant.pkg")
+monterey=("Monterey" "12.6.3" "https://swcdn.apple.com/content/downloads/17/14/032-33828-A_KX25OQBX8S/lz9yip4rmenyju8nkv4wpaqtdmvzfogkcb/InstallAssistant.pkg")
+monterey1262=("Monterey" "12.6.2" "https://swcdn.apple.com/content/downloads/55/35/032-12843-A_35UCTHBNLI/z1twfbx3mhypq6g7ljtz52z6nsv0n7e4o5/InstallAssistant.pkg")
 
 #
 # VENTURA
 # get from https://mrmacintosh.com/macos-ventura-13-full-installer-database-download-directly-from-apple/
 #
-venturaVersion="13.2.1"
-venturaLink="https://swcdn.apple.com/content/downloads/26/15/032-48342-A_OG2YEE7OSX/8sd3qpy79cimb7cjiy47cytps0gm7m0z5l/InstallAssistant.pkg"
-
-ventura=("3" "Ventura" "13.2.1" "https://swcdn.apple.com/content/downloads/26/15/032-48342-A_OG2YEE7OSX/8sd3qpy79cimb7cjiy47cytps0gm7m0z5l/InstallAssistant.pkg")
-ventura132=("5" "Ventura" "13.2" "https://swcdn.apple.com/content/downloads/07/49/032-35706-A_E13VXNW85V/adm3i8lj9k9gmo6swtwto3lv6jc57q8i61/InstallAssistant.pkg")
+ventura=("Ventura" "13.2.1" "https://swcdn.apple.com/content/downloads/26/15/032-48342-A_OG2YEE7OSX/8sd3qpy79cimb7cjiy47cytps0gm7m0z5l/InstallAssistant.pkg")
+ventura132=("Ventura" "13.2" "https://swcdn.apple.com/content/downloads/07/49/032-35706-A_E13VXNW85V/adm3i8lj9k9gmo6swtwto3lv6jc57q8i61/InstallAssistant.pkg")
 
 
 
@@ -83,7 +74,7 @@ function eraseDisk() {
 
     echo -e "${GREEN}[INFO]:${NC} Destination disk is: ${diskPath}"
     echo
-    echo -e "${RED}[CHOICE]: Do you want to delete all data on this computer? (y/n)${NC}"
+    echo -e "${RED}[CHOICE]: Do you want to delete all data on this computer? (y/N)${NC}"
     read answer < /dev/tty
     echo
     
@@ -128,10 +119,16 @@ function eraseDisk() {
 
 function versionPrinter() {
 
-    name=$1[@]
+    #
+    # `versionPrinter x arrName`
+    # will print the array as line x in the selector
+    # name version link (link will not be printed)
+    # 
+
+    name=$2[@]
     args=("${!name}")
 
-    echo -e "\t${args[0]}. macOS ${args[1]}\t${args[2]}"
+    echo -e "\t${1}. macOS ${args[0]}\t${args[1]}"
 
 }
 
@@ -146,22 +143,25 @@ function downloadInstaller() {
     #
 
     echo -e "${GREEN}[INFO]:${NC} Set up folder ..."
-    # rm -rf "${diskPath}"/private/tmp/* >/dev/null 2>&1 ### This would delete manually downlaoded Installers ...
     mkdir -p "${diskPath}"/private/tmp
     cd "${diskPath}/private/tmp/"
 
     echo
     echo -e "${GREEN}[CHOICE]:${NC} Choose your macOS Version"
+
     echo
-    versionPrinter bigsur
-    versionPrinter monterey
-    versionPrinter ventura
+    echo "Newest Versions"
+    versionPrinter 1 bigsur
+    versionPrinter 2 monterey
+    versionPrinter 3 ventura
+
     echo
     echo "Previous Versions:"
-    versionPrinter monterey1262
-    versionPrinter ventura132
+    versionPrinter 4 monterey1262
+    versionPrinter 5 ventura132
+
     echo
-    echo -e "${GREEN}[CHOICE]: Enter a number (1/2/3)${NC}"
+    echo -e "${GREEN}[CHOICE]: Enter a number (1..5):${NC}"
     read answer < /dev/tty
     echo
 
@@ -253,11 +253,13 @@ function expandAndSet() {
     echo -e "${GREEN}[INFO]:${NC} Copying in place ..."
     cp -R Source/Payload/Applications/"Install macOS ${macOSName}.app" "${diskPath}"/private/tmp/ &>/dev/null
     
-    echo -e "${GREEN}[INFO]:${NC} Changing permissions ..."
+    echo -e "${GREEN}[INFO]:${NC} Adding data ..."
     SSPATH="Install macOS ${macOSName}.app/Contents/SharedSupport"
     mkdir -p "$SSPATH"
     /bin/chmod 0755 "$SSPATH"
     mv InstallAssistant.pkg "$SSPATH"/SharedSupport.dmg
+
+    echo -e "${GREEN}[INFO]:${NC} Changing permissions ..."
     /bin/chmod 0644 "$SSPATH"/SharedSupport.dmg
     /usr/sbin/chown -R root:wheel "$SSPATH"/SharedSupport.dmg
     /usr/bin/chflags -h norestricted "$SSPATH"/SharedSupport.dmg
@@ -285,6 +287,19 @@ function unmountExternalDisks() {
 
 
 
+function startInstaller() {
+
+    #
+    # prints info and starts installer
+    #
+
+    echo -e "${GREEN}[INFO]:${NC} Starting installer ..."
+    "${diskPath}/private/tmp/Install macOS ${macOSName}.app"/Contents/MacOS/InstallAssistant_springboard >/dev/null
+
+}
+
+
+
 function main() {
 
     #
@@ -300,8 +315,7 @@ function main() {
     expandAndSet
     unmountExternalDisks
 
-    echo -e "${GREEN}[INFO]:${NC} Starting installer ..."
-    "${diskPath}/private/tmp/Install macOS ${macOSName}.app"/Contents/MacOS/InstallAssistant_springboard >/dev/null
+    startInstaller
 
 }
 
