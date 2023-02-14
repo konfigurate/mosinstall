@@ -25,6 +25,7 @@ montereyVersion="12.6.3"
 montereyLink="https://swcdn.apple.com/content/downloads/17/14/032-33828-A_KX25OQBX8S/lz9yip4rmenyju8nkv4wpaqtdmvzfogkcb/InstallAssistant.pkg"
 
 monterey=("2" "Monterey" "12.6.3" "https://swcdn.apple.com/content/downloads/17/14/032-33828-A_KX25OQBX8S/lz9yip4rmenyju8nkv4wpaqtdmvzfogkcb/InstallAssistant.pkg")
+monterey1262=("4" "Monterey" "12.6.2" "https://swcdn.apple.com/content/downloads/55/35/032-12843-A_35UCTHBNLI/z1twfbx3mhypq6g7ljtz52z6nsv0n7e4o5/InstallAssistant.pkg")
 
 #
 # VENTURA
@@ -34,6 +35,7 @@ venturaVersion="13.2.1"
 venturaLink="https://swcdn.apple.com/content/downloads/26/15/032-48342-A_OG2YEE7OSX/8sd3qpy79cimb7cjiy47cytps0gm7m0z5l/InstallAssistant.pkg"
 
 ventura=("3" "Ventura" "13.2.1" "https://swcdn.apple.com/content/downloads/26/15/032-48342-A_OG2YEE7OSX/8sd3qpy79cimb7cjiy47cytps0gm7m0z5l/InstallAssistant.pkg")
+ventura132=("5" "Ventura" "13.2" "https://swcdn.apple.com/content/downloads/07/49/032-35706-A_E13VXNW85V/adm3i8lj9k9gmo6swtwto3lv6jc57q8i61/InstallAssistant.pkg")
 
 
 
@@ -128,6 +130,7 @@ function versionPrinter() {
 
     name=$1[@]
     args=("${!name}")
+
     echo -e "\t${args[0]}. macOS ${args[1]}\t${args[2]}"
 
 }
@@ -150,12 +153,13 @@ function downloadInstaller() {
     echo
     echo -e "${GREEN}[CHOICE]:${NC} Choose your macOS Version"
     echo
-    # echo -e "\t1. macOS Big Sur\t${bigSurVersion}"
-    # echo -e "\t2. macOS Monterey\t${montereyVersion}"
-    # echo -e "\t3. macOS Ventura\t${venturaVersion}"
     versionPrinter bigsur
     versionPrinter monterey
     versionPrinter ventura
+    echo
+    echo "Previous Versions:"
+    versionPrinter monterey1262
+    versionPrinter ventura132
     echo
     echo -e "${GREEN}[CHOICE]: Enter a number (1/2/3)${NC}"
     read answer < /dev/tty
@@ -164,24 +168,23 @@ function downloadInstaller() {
     case $answer in
     
         "1" )
-            # macOSName="Big Sur"
-            # macOSVersion=${bigSurVersion}
-            # macOSUrl=${bigSurLink}
             arr=bigsur
             ;;
 
         "2" )
-            # macOSName="Monterey"
-            # macOSVersion=${montereyVersion}
-            # macOSUrl=${montereyLink}
             arr=monterey
             ;;
         
         "3" )
-            # macOSName="Ventura"
-            # macOSVersion=${venturaVersion}
-            # macOSUrl=${venturaLink}
             arr=ventura
+            ;;
+        
+        "4" )
+            arr=monterey1262
+            ;;
+        
+        "5" )
+            arr=ventura132
             ;;
         
         * )
@@ -191,8 +194,11 @@ function downloadInstaller() {
 
     esac
 
+    # load array
     name=$arr[@]
     macOS=("${!name}")
+
+    # get values
     macOSName=${macOS[1]}
     macOSVersion=${macOS[2]}
     macOSUrl=${macOS[3]}
