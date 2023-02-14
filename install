@@ -15,6 +15,8 @@
 bigSurVersion="11.7.3"
 bigSurLink="https://swcdn.apple.com/content/downloads/42/51/032-33756-A_AESP8TG5IZ/etbmyyij5yv83bsn0os00qz6dc92zykvog/InstallAssistant.pkg"
 
+bigsur=("1" "Big Sur" "11.7.3" "https://swcdn.apple.com/content/downloads/42/51/032-33756-A_AESP8TG5IZ/etbmyyij5yv83bsn0os00qz6dc92zykvog/InstallAssistant.pkg")
+
 #
 # MONTEREY
 # get it from https://mrmacintosh.com/macos-12-monterey-full-installer-database-download-directly-from-apple/
@@ -22,12 +24,16 @@ bigSurLink="https://swcdn.apple.com/content/downloads/42/51/032-33756-A_AESP8TG5
 montereyVersion="12.6.3"
 montereyLink="https://swcdn.apple.com/content/downloads/17/14/032-33828-A_KX25OQBX8S/lz9yip4rmenyju8nkv4wpaqtdmvzfogkcb/InstallAssistant.pkg"
 
+monterey=("2" "Monterey" "12.6.3" "https://swcdn.apple.com/content/downloads/17/14/032-33828-A_KX25OQBX8S/lz9yip4rmenyju8nkv4wpaqtdmvzfogkcb/InstallAssistant.pkg")
+
 #
 # VENTURA
 # get from https://mrmacintosh.com/macos-ventura-13-full-installer-database-download-directly-from-apple/
 #
 venturaVersion="13.2.1"
 venturaLink="https://swcdn.apple.com/content/downloads/26/15/032-48342-A_OG2YEE7OSX/8sd3qpy79cimb7cjiy47cytps0gm7m0z5l/InstallAssistant.pkg"
+
+ventura=("3" "Ventura" "13.2.1" "https://swcdn.apple.com/content/downloads/26/15/032-48342-A_OG2YEE7OSX/8sd3qpy79cimb7cjiy47cytps0gm7m0z5l/InstallAssistant.pkg")
 
 
 
@@ -118,6 +124,16 @@ function eraseDisk() {
 
 
 
+function versionPrinter() {
+
+    name=$1[@]
+    args=("${!name}")
+    echo -e "\t${args[0]}. macOS ${args[1]}\t${args[2]}"
+
+}
+
+
+
 function downloadInstaller() {
 
     #
@@ -134,9 +150,12 @@ function downloadInstaller() {
     echo
     echo -e "${GREEN}[CHOICE]:${NC} Choose your macOS Version"
     echo
-    echo -e "\t1. macOS Big Sur\t${bigSurVersion}"
-    echo -e "\t2. macOS Monterey\t${montereyVersion}"
-    echo -e "\t3. macOS Ventura\t${venturaVersion}"
+    # echo -e "\t1. macOS Big Sur\t${bigSurVersion}"
+    # echo -e "\t2. macOS Monterey\t${montereyVersion}"
+    # echo -e "\t3. macOS Ventura\t${venturaVersion}"
+    versionPrinter bigsur
+    versionPrinter monterey
+    versionPrinter ventura
     echo
     echo -e "${GREEN}[CHOICE]: Enter a number (1/2/3)${NC}"
     read answer < /dev/tty
@@ -148,18 +167,21 @@ function downloadInstaller() {
             macOSName="Big Sur"
             macOSVersion=${bigSurVersion}
             macOSUrl=${bigSurLink}
+            arr=bigsur
             ;;
 
         "2" )
             macOSName="Monterey"
             macOSVersion=${montereyVersion}
             macOSUrl=${montereyLink}
+            arr=monterey
             ;;
         
         "3" )
             macOSName="Ventura"
             macOSVersion=${venturaVersion}
             macOSUrl=${venturaLink}
+            arr=ventura
             ;;
         
         * )
@@ -168,6 +190,12 @@ function downloadInstaller() {
             ;;
 
     esac
+
+    name=$arr[@]
+    macOS=("${!name}")
+    macOSName=${macOS[1]}
+    macOSVersion=${macOS[2]}
+    macOSUrl=${macOS[3]}
 
     echo -e "${GREEN}[INFO]:${NC} You chose macOS ${macOSName} ${macOSVersion}"
 
