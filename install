@@ -164,23 +164,23 @@ function downloadInstaller() {
     case $answer in
     
         "1" )
-            macOSName="Big Sur"
-            macOSVersion=${bigSurVersion}
-            macOSUrl=${bigSurLink}
+            # macOSName="Big Sur"
+            # macOSVersion=${bigSurVersion}
+            # macOSUrl=${bigSurLink}
             arr=bigsur
             ;;
 
         "2" )
-            macOSName="Monterey"
-            macOSVersion=${montereyVersion}
-            macOSUrl=${montereyLink}
+            # macOSName="Monterey"
+            # macOSVersion=${montereyVersion}
+            # macOSUrl=${montereyLink}
             arr=monterey
             ;;
         
         "3" )
-            macOSName="Ventura"
-            macOSVersion=${venturaVersion}
-            macOSUrl=${venturaLink}
+            # macOSName="Ventura"
+            # macOSVersion=${venturaVersion}
+            # macOSUrl=${venturaLink}
             arr=ventura
             ;;
         
