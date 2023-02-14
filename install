@@ -199,9 +199,9 @@ function downloadInstaller() {
     macOS=("${!name}")
 
     # get values
-    macOSName=${macOS[1]}
-    macOSVersion=${macOS[2]}
-    macOSUrl=${macOS[3]}
+    macOSName=${macOS[0]}
+    macOSVersion=${macOS[1]}
+    macOSUrl=${macOS[2]}
 
     echo -e "${GREEN}[INFO]:${NC} You chose macOS ${macOSName} ${macOSVersion}"
 
