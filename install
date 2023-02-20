@@ -13,7 +13,8 @@
 # BIG SUR
 # get it from https://mrmacintosh.com/macos-big-sur-full-installer-database-download-directly-from-apple/
 #
-bigsur=("Big Sur" "11.7.3" "https://swcdn.apple.com/content/downloads/42/51/032-33756-A_AESP8TG5IZ/etbmyyij5yv83bsn0os00qz6dc92zykvog/InstallAssistant.pkg")
+bugsur=("Big Sur" "11.7.4" "https://swcdn.apple.com/content/downloads/26/54/032-50519-A_CXUH67MIZN/z1mbjod7nna0yhubto3a7pyq1gilhin6fw/InstallAssistant.pkg")
+bigsur1173=("Big Sur" "11.7.3" "https://swcdn.apple.com/content/downloads/42/51/032-33756-A_AESP8TG5IZ/etbmyyij5yv83bsn0os00qz6dc92zykvog/InstallAssistant.pkg")
 
 #
 # MONTEREY
@@ -158,8 +159,9 @@ function downloadInstaller() {
 
     echo
     echo "Previous Versions:"
-    versionPrinter 4 monterey1262
-    versionPrinter 5 ventura132
+    versionPrinter 4 bigsur1173
+    versionPrinter 5 monterey1262
+    versionPrinter 6 ventura132
 
     echo
     echo -e "${GREEN}[CHOICE]: Enter a number (1..5):${NC}"
@@ -180,11 +182,15 @@ function downloadInstaller() {
             arr=ventura
             ;;
         
-        "4" )
-            arr=monterey1262
+        "4")
+            arr=bigsur1173
             ;;
         
         "5" )
+            arr=monterey1262
+            ;;
+        
+        "6" )
             arr=ventura132
             ;;
         
