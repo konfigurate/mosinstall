@@ -164,7 +164,7 @@ function downloadInstaller() {
     versionPrinter 6 ventura132
 
     echo
-    echo -e "${GREEN}[CHOICE]: Enter a number (1..5):${NC}"
+    echo -e "${GREEN}[CHOICE]: Enter a number (1..6):${NC}"
     read answer < /dev/tty
     echo
 
@@ -210,32 +210,7 @@ function downloadInstaller() {
     macOSVersion=${macOS[1]}
     macOSUrl=${macOS[2]}
 
-    echo -e "${GREEN}[INFO]:${NC} You chose macOS ${macOSName} ${macOSVersion}"
-
-    if [[ -f "InstallAssistant.pkg" ]]; then
-        echo -e "${GREEN}[INFO]:${NC} InstallAssistant.pkg found, use that one? (Y/n)"
-        read useIA < /dev/tty
-
-        case $useIA in
-            [Yy]* )
-                echo -e "${GREEN}[INFO]:${NC} Using predownloaded Installer."
-                return
-                ;;
-            
-            [Nn]* )
-                echo -e "${GREEN}[INFO]:${NC} Deleting ..."
-                rm InstallAssistant.pkg >/dev/null 2>&1
-                ;;
-            
-            * )
-                echo -e "${GREEN}[INFO]:${NC} Invalid input, exiting ..."
-                exit
-                ;;
-        esac
-    fi 
-
-    echo
-    echo -e "${GREEN}[INFO]:${NC} Downloading files from Apple ..."
+    echo -e "${GREEN}[INFO]:${NC} Downloading macOS ${macOSName} ${macOSVersion} from Apple ..."
     curl -L --progress-bar  -f -o InstallAssistant.pkg ${macOSUrl}
     
     if [[ $? -eq 0 ]]; then
