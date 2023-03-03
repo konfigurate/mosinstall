@@ -210,11 +210,13 @@ function downloadInstaller() {
     macOSVersion=${macOS[1]}
     macOSUrl=${macOS[2]}
 
-    echo -e "${GREEN}[INFO]:${NC} Downloading macOS ${macOSName} ${macOSVersion} from Apple ..."
+    echo -e "${GREEN}[INFO]:${NC} Downloading macOS ${macOSName} ${macOSVersion} from Apple."
+    echo -e "${GREEN}[INFO]:${NC} curl ..."
+
     curl -L --progress-bar  -f -o InstallAssistant.pkg ${macOSUrl}
     
     if [[ $? -eq 0 ]]; then
-        echo -e "${GREEN}[INFO]:${NC} Download finished."
+        echo -e "${GREEN}[INFO]:${NC} ... done."
     else 
         echo -e "${RED}[ERROR]:${NC} Download failed. Exiting now!"
         exit
@@ -264,6 +266,7 @@ function unmountExternalDisks() {
     echo -e "${GREEN}[INFO]:${NC} Looking for external drives and unmounting ..."
     externalDisk=$(diskutil list | grep external | awk -F " " {'print $1'})
     diskutil umountDisk $externalDisk 2> /dev/null
+    echo -e "${GREEN}[INFO]:${NC} ... done."
 
 }
 
@@ -290,8 +293,6 @@ function main() {
     
     printInfo
     eraseDisk
-    
-    sleep 1
 
     downloadInstaller
     expandAndSet
