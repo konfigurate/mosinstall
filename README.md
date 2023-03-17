@@ -18,20 +18,20 @@ curl -s raw.githubusercontent.com/konfigurate/mosinstall/main/install | bash
 
 ## Version Compatibility
 
-### Mojave
+- Mojave and older
 
-Mojave doesn't support the curl command, so the script fails to start.
+    When using Mojave, I had problems getting curl to work. Also when downlaoded, the Installer would always ask for an administrator password, which is not set in the recovery. Using the Mojave Recovery will therefore not work.
 
-### Catalina, Big Sur and Monterey
+- Catalina, Big Sur and Monterey
 
-Using the Recovery for those three Versions supports the installation of all three Versions:
+    Using the Recovery for those three Versions supports the installation of all three Versions:
 
-- Big Sur
-- Monterey
+    - Big Sur
+    - Monterey
+    - Ventura
+
 - Ventura
 
-### Ventura
+    The Ventura Recovery doesn't support downgrading to other Versions of macOS, so you can only install Ventura from here.
 
-The Ventura Recovery doesn't support downgrading to other Versions of macOS, so you can only install Ventura from here.
-
-You may have success using Shift+Option+Command+R to boot in an older Recovery.
+    You may have success using Shift+Option+Command+R to boot in an older Recovery, but Mojave or older won't work, as already described.
