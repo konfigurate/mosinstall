@@ -13,17 +13,25 @@ You will be able to choose the macOS Version you want, it downloads that one, se
 Start the setup by running the following in line in the Terminal in Recovery Mode:
 
 ```bash
-bash < <(curl -s raw.githubusercontent.com/konfigurate/mosinstall/main/install)
+curl -s raw.githubusercontent.com/konfigurate/mosinstall/main/install | bash
 ```
 
-## Recovery → Version Compatibility
+## Version Compatibility
 
-|Recovery Mode Version|Big Sur|Monterey|Ventura|
-|:--|:-:|:-:|:-:|
-|Mojave  |❌|❌|❌|
-|Catalina|✅|✅|✅|
-|Big Sur |✅|✅|✅|
-|Monterey|✅|✅|✅|
-|Ventura |❌|❌|✅|
+### Mojave
 
-Mojave does not support the curl command in recovery, Ventura doesnt support downgrades.
+Mojave doesn't support the curl command, so the script fails to start.
+
+### Catalina, Big Sur and Monterey
+
+Using the Recovery for those three Versions supports the installation of all three Versions:
+
+- Big Sur
+- Monterey
+- Ventura
+
+### Ventura
+
+The Ventura Recovery doesn't support downgrading to other Versions of macOS, so you can only install Ventura from here.
+
+You may have success using Shift+Option+Command+R to boot in an older Recovery.
