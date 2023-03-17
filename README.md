@@ -16,13 +16,14 @@ Start the setup by running the following in line in the Terminal in Recovery Mod
 bash < <(curl -s raw.githubusercontent.com/konfigurate/mosinstall/main/install)
 ```
 
-On Intel, it does not seem to allow downgrades from the Ventura Recovery, might work on M1.
-
 ## Recovery → Version Compatibility
 
-|Recovery Mode Version|Big Sur|Monterey|Ventura
+|Recovery Mode Version|Big Sur|Monterey|Ventura|
 |:--|:-:|:-:|:-:|
+|Mojave  |❌|❌|❌|
 |Catalina|✅|✅|✅|
-|Big Sur|✅|✅|✅|
+|Big Sur |✅|✅|✅|
 |Monterey|✅|✅|✅|
-|Ventura|❌|❌|✅|
+|Ventura |❌|❌|✅|
+
+Mojave does not support the curl command in recovery, Ventura doesnt support downgrades.
