@@ -52,9 +52,11 @@ function printInfo() {
     #
 
     echo
-    echo -e "${BLUE} mosinstall by konfigurate ${NC}"
-    echo -e "${BLUE} github.com/konfigurate/mosinstall ${NC}"
-    echo -e "${BLUE} Version 2023.03.27 ${NC}"
+    echo "+-----------------------------------+
+    echo "| mosinstall by konfigurate         |"
+    echo "| github.com/konfigurate/mosinstall |"
+    echo "| Version 2023.03.27                |"
+    echo "+-----------------------------------+"
     echo
     echo -e "${RED}[INFO]: This script can remove all data on your computer! ${NC}"
     echo -e "${RED}[INFO]: Press CTRL-Z to cancel this process anytime! ${NC}"
