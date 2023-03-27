@@ -1,4 +1,4 @@
-# macOS-Install
+# macOS-Install aka. mosinstall
 
 ⚠️ This scripts is not done. Use at your own responsibility! ⚠️
 
@@ -16,7 +16,7 @@ Start the setup by running the following in line in the Terminal in Recovery Mod
 curl -s raw.githubusercontent.com/konfigurate/mosinstall/main/install | bash
 ```
 
-## Version Compatibility
+## Recovery Version Compatibility
 
 - Mojave and older
 
@@ -24,7 +24,7 @@ curl -s raw.githubusercontent.com/konfigurate/mosinstall/main/install | bash
 
 - Catalina, Big Sur and Monterey
 
-    Using the Recovery for those three Versions supports the installation of all three Versions:
+    Using the Recovery of those three Versions supports the installation of all three Versions:
 
     - Big Sur
     - Monterey

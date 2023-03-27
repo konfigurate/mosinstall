@@ -13,21 +13,24 @@
 # BIG SUR
 # get it from https://mrmacintosh.com/macos-big-sur-full-installer-database-download-directly-from-apple/
 #
-bigsur=("Big Sur" "11.7.4" "https://swcdn.apple.com/content/downloads/26/54/032-50519-A_CXUH67MIZN/z1mbjod7nna0yhubto3a7pyq1gilhin6fw/InstallAssistant.pkg")
+bigsur1175=("Big Sur" "11.7.5" "https://swcdn.apple.com/content/downloads/15/42/032-63762-A_6CJ6JOEC74/hdc26sfhq2a4c4x7yvafi9mrbe3jg3xo3d/InstallAssistant.pkg")
+bigsur1174=("Big Sur" "11.7.4" "https://swcdn.apple.com/content/downloads/26/54/032-50519-A_CXUH67MIZN/z1mbjod7nna0yhubto3a7pyq1gilhin6fw/InstallAssistant.pkg")
 bigsur1173=("Big Sur" "11.7.3" "https://swcdn.apple.com/content/downloads/42/51/032-33756-A_AESP8TG5IZ/etbmyyij5yv83bsn0os00qz6dc92zykvog/InstallAssistant.pkg")
 
 #
 # MONTEREY
 # get it from https://mrmacintosh.com/macos-12-monterey-full-installer-database-download-directly-from-apple/
 #
-monterey=("Monterey" "12.6.3" "https://swcdn.apple.com/content/downloads/17/14/032-33828-A_KX25OQBX8S/lz9yip4rmenyju8nkv4wpaqtdmvzfogkcb/InstallAssistant.pkg")
+monterey1163=("Monterey" "12.6.4" "https://swcdn.apple.com/content/downloads/07/41/032-63749-A_38MYH58MVP/0ynlao7ghdixj9sgw8im15vwf4hox0hnzc/InstallAssistant.pkg")
+monterey1163=("Monterey" "12.6.3" "https://swcdn.apple.com/content/downloads/17/14/032-33828-A_KX25OQBX8S/lz9yip4rmenyju8nkv4wpaqtdmvzfogkcb/InstallAssistant.pkg")
 monterey1262=("Monterey" "12.6.2" "https://swcdn.apple.com/content/downloads/55/35/032-12843-A_35UCTHBNLI/z1twfbx3mhypq6g7ljtz52z6nsv0n7e4o5/InstallAssistant.pkg")
 
 #
 # VENTURA
 # get from https://mrmacintosh.com/macos-ventura-13-full-installer-database-download-directly-from-apple/
 #
-ventura=("Ventura" "13.2.1" "https://swcdn.apple.com/content/downloads/26/15/032-48342-A_OG2YEE7OSX/8sd3qpy79cimb7cjiy47cytps0gm7m0z5l/InstallAssistant.pkg")
+ventura133=("Ventura" "13.3" "https://swcdn.apple.com/content/downloads/41/46/002-75541-A_N0W4MFQ0NM/rwkz3k8cd91dvrvddymange3k8004xkt4v/InstallAssistant.pkg")
+ventura1321=("Ventura" "13.2.1" "https://swcdn.apple.com/content/downloads/26/15/032-48342-A_OG2YEE7OSX/8sd3qpy79cimb7cjiy47cytps0gm7m0z5l/InstallAssistant.pkg")
 ventura132=("Ventura" "13.2" "https://swcdn.apple.com/content/downloads/07/49/032-35706-A_E13VXNW85V/adm3i8lj9k9gmo6swtwto3lv6jc57q8i61/InstallAssistant.pkg")
 
 
@@ -49,8 +52,12 @@ function printInfo() {
     #
 
     echo
-    echo -e "${RED}[INFO]: This script can remove all data on your computer!${NC}"
-    echo -e "${RED}[INFO]: Press CTRL-Z to cancel this process anytime!${NC}"
+    echo -e "${BLUE} mosinstall by konfigurate ${NC}"
+    echo -e "${BLUE} github.com/konfigurate/mosinstall ${NC}"
+    echo -e "${BLUE} Version 2023.03.27 ${NC}"
+    echo
+    echo -e "${RED}[INFO]: This script can remove all data on your computer! ${NC}"
+    echo -e "${RED}[INFO]: Press CTRL-Z to cancel this process anytime! ${NC}"
     echo -e "${GREEN}[INFO]:${NC} Starting processes ..."
 
 }
@@ -152,16 +159,22 @@ function downloadInstaller() {
     echo -e "${GREEN}[CHOICE]:${NC} Choose your macOS Version"
 
     echo
-    echo "Newest Versions"
-    versionPrinter 1 bigsur
-    versionPrinter 2 monterey
-    versionPrinter 3 ventura
+    echo "Ventura:"
+    versionPrinter 1 ventura133
+    versionPrinter 2 ventura1321
+    versionPrinter 3 ventura132
 
     echo
-    echo "Previous Versions:"
-    versionPrinter 4 bigsur1173
-    versionPrinter 5 monterey1262
-    versionPrinter 6 ventura132
+    echo "Monterey:"
+    versionPrinter 4 monterey1264
+    versionPrinter 5 monterey1263
+    versionPrinter 6 monterey1262
+
+    echo
+    echo "Big Sur:"
+    versionPrinter 7 bigsur1175
+    versionPrinter 8 bigsur1174
+    versionPrinter 9 bigsur1173
 
     echo
     echo -e "${GREEN}[CHOICE]: Enter a number (1..6):${NC}"
@@ -170,30 +183,24 @@ function downloadInstaller() {
 
     case $answer in
     
-        "1" )
-            arr=bigsur
-            ;;
-
-        "2" )
-            arr=monterey
-            ;;
-        
+        "1" ) 
+            arr=ventura133 ;;
+        "2" ) 
+            arr=ventura1321 ;;
         "3" )
-            arr=ventura
-            ;;
-        
+            arr=ventura132 ;;    
         "4")
-            arr=bigsur1173
-            ;;
-        
+            arr=monterey1264 ;;
         "5" )
-            arr=monterey1262
-            ;;
-        
+            arr=monterey1263 ;;
         "6" )
-            arr=ventura132
-            ;;
-        
+            arr=monterey1262 ;;
+        "7" )
+            arr=bigsur1175 ;;
+        "8" )
+            arr=bigsur1174 ;;
+        "9" )
+            arr=bigsur1173 ;;
         * )
             echo -e "${RED}[INFO]:${NC} Nothing selected, exiting now ..."
             exit
