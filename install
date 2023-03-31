@@ -179,7 +179,7 @@ function downloadInstaller() {
     versionPrinter 9 bigsur1173
 
     echo
-    echo -e "${GREEN}[CHOICE]: Enter a number (1..6):${NC}"
+    echo -e "${GREEN}[CHOICE]: Enter a number (1..9):${NC}"
     read answer < /dev/tty
     echo
 
