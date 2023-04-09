@@ -29,9 +29,9 @@ monterey1262=("Monterey" "12.6.2" "https://swcdn.apple.com/content/downloads/55/
 # VENTURA
 # get from https://mrmacintosh.com/macos-ventura-13-full-installer-database-download-directly-from-apple/
 #
+ventura1331=("Ventura" "13.3.1" "https://swcdn.apple.com/content/downloads/37/35/032-66588-A_P5QIYDIIZL/kkuzd39hnskjm12vimzblklo3drb3majbf/InstallAssistant.pkg")
 ventura133=("Ventura" "13.3" "https://swcdn.apple.com/content/downloads/41/46/002-75541-A_N0W4MFQ0NM/rwkz3k8cd91dvrvddymange3k8004xkt4v/InstallAssistant.pkg")
 ventura1321=("Ventura" "13.2.1" "https://swcdn.apple.com/content/downloads/26/15/032-48342-A_OG2YEE7OSX/8sd3qpy79cimb7cjiy47cytps0gm7m0z5l/InstallAssistant.pkg")
-ventura132=("Ventura" "13.2" "https://swcdn.apple.com/content/downloads/07/49/032-35706-A_E13VXNW85V/adm3i8lj9k9gmo6swtwto3lv6jc57q8i61/InstallAssistant.pkg")
 
 
 
@@ -55,7 +55,7 @@ function printInfo() {
     echo "+-----------------------------------+"
     echo "| mosinstall by konfigurate         |"
     echo "| github.com/konfigurate/mosinstall |"
-    echo "|                Version 2023.03.27 |"
+    echo "|                Version 2023.04.09 |"
     echo "+-----------------------------------+"
     echo
     echo -e "${RED}[INFO]: This script can remove all data on your computer! ${NC}"
@@ -162,9 +162,9 @@ function downloadInstaller() {
 
     echo
     echo "Ventura:"
-    versionPrinter 1 ventura133
-    versionPrinter 2 ventura1321
-    versionPrinter 3 ventura132
+    versionPrinter 1 ventura1331
+    versionPrinter 2 ventura133
+    versionPrinter 3 ventura1321
 
     echo
     echo "Monterey:"
@@ -186,11 +186,11 @@ function downloadInstaller() {
     case $answer in
     
         "1" ) 
-            arr=ventura133 ;;
+            arr=ventura1331 ;;
         "2" ) 
-            arr=ventura1321 ;;
+            arr=ventura133 ;;
         "3" )
-            arr=ventura132 ;;    
+            arr=ventura1321 ;;    
         "4")
             arr=monterey1264 ;;
         "5" )
@@ -243,6 +243,7 @@ function expandAndSet() {
 
     echo -e "${GREEN}[INFO]:${NC} Expanding Installer ..."
     pkgutil --expand-full InstallAssistant.pkg Source
+
     echo -e "${GREEN}[INFO]:${NC} Copying in place ..."
     cp -R Source/Payload/Applications/"Install macOS ${macOSName}.app" "${diskPath}"/private/tmp/ &>/dev/null
     
@@ -260,6 +261,7 @@ function expandAndSet() {
     echo -e "${GREEN}[INFO]:${NC} Cleanup ..."
     rm -rf Source
     rm -rf InstallAssistant.pkg
+
     echo -e "${GREEN}[INFO]:${NC} Prerequisites done."
 
 }

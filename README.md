@@ -1,10 +1,6 @@
 # macOS-Install aka. mosinstall
 
-⚠️ This scripts is not done. Use at your own responsibility! ⚠️
-
-----
-
-`mosinstall` was made to force a specific version of macOS in the Recovery Mode of Macs. By downloading the installer directly, we can download the version required and run the program from within the Recovery Mode.
+`mosinstall` was made to force the download of a specific version of macOS in the macOS recovery mode.
 
 `install` will ask you if you want to delete your drive and acts accordingly. On Catalina, I saw on several occasions, that it might have problems deleting the drive. You'll have to delete the drive yourself.
 
@@ -18,7 +14,7 @@ curl -s raw.githubusercontent.com/konfigurate/mosinstall/main/install | bash
 
 ## Recovery Version Compatibility
 
-- Mojave and older
+- Mojave and older won't work
 
     When using Mojave, I had problems getting curl to work. Also when downlaoded, the Installer would always ask for an administrator password, which is not set in the recovery. Using the Mojave Recovery will therefore not work.
 
