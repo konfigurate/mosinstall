@@ -192,11 +192,11 @@ function downloadInstaller() {
         "3" )
             arr=ventura1321 ;;    
         "4")
-            arr=monterey1264 ;;
+            arr=monterey1265 ;;
         "5" )
-            arr=monterey1263 ;;
+            arr=monterey1264 ;;
         "6" )
-            arr=monterey1262 ;;
+            arr=monterey1263 ;;
         "7" )
             arr=bigsur1175 ;;
         "8" )
