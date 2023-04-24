@@ -55,7 +55,7 @@ function printInfo() {
     echo "+-----------------------------------+"
     echo "| mosinstall by konfigurate         |"
     echo "| github.com/konfigurate/mosinstall |"
-    echo "|                Version 2023.04.09 |"
+    echo "|                Version 2023.04.24 |"
     echo "+-----------------------------------+"
     echo
     echo -e "${RED}[INFO]: This script can remove all data on your computer! ${NC}"
