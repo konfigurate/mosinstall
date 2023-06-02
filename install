@@ -13,25 +13,23 @@
 # BIG SUR
 # get it from https://mrmacintosh.com/macos-big-sur-full-installer-database-download-directly-from-apple/
 #
-bigsur1175=("Big Sur" "11.7.5" "https://swcdn.apple.com/content/downloads/15/42/032-63762-A_6CJ6JOEC74/hdc26sfhq2a4c4x7yvafi9mrbe3jg3xo3d/InstallAssistant.pkg")
-bigsur1174=("Big Sur" "11.7.4" "https://swcdn.apple.com/content/downloads/26/54/032-50519-A_CXUH67MIZN/z1mbjod7nna0yhubto3a7pyq1gilhin6fw/InstallAssistant.pkg")
-bigsur1173=("Big Sur" "11.7.3" "https://swcdn.apple.com/content/downloads/42/51/032-33756-A_AESP8TG5IZ/etbmyyij5yv83bsn0os00qz6dc92zykvog/InstallAssistant.pkg")
+bigsur1177=("Big Sur" "11.7.7" "https://swcdn.apple.com/content/downloads/26/34/032-82176-A_8REZNXFIVG/emf4n3m7klcrjxsfxytps0km45fnjz5lgn/InstallAssistant.pkg")
 
 #
 # MONTEREY
 # get it from https://mrmacintosh.com/macos-12-monterey-full-installer-database-download-directly-from-apple/
 #
+monterey1266=("Monterey" "12.6.6" "https://swcdn.apple.com/content/downloads/52/15/032-82192-A_RBZQI1MZUL/hd4ydfjtjsy376z3y8ijtlijcob0qjqgwj/InstallAssistant.pkg")
 monterey1265=("Monterey" "12.6.5" "https://swcdn.apple.com/content/downloads/24/38/032-71575-A_N8LLYQ3VAW/slqvm2ho1x1h2rtmevw0ev05er5mvoqp16/InstallAssistant.pkg")
 monterey1264=("Monterey" "12.6.4" "https://swcdn.apple.com/content/downloads/07/41/032-63749-A_38MYH58MVP/0ynlao7ghdixj9sgw8im15vwf4hox0hnzc/InstallAssistant.pkg")
-monterey1263=("Monterey" "12.6.3" "https://swcdn.apple.com/content/downloads/17/14/032-33828-A_KX25OQBX8S/lz9yip4rmenyju8nkv4wpaqtdmvzfogkcb/InstallAssistant.pkg")
 
 #
 # VENTURA
 # get from https://mrmacintosh.com/macos-ventura-13-full-installer-database-download-directly-from-apple/
 #
+ventura134=("Ventura" "13.4" "https://swcdn.apple.com/content/downloads/63/49/032-84910-A_3SSTBN1HDA/h89vitwfbzt54jcbwpfwkmrn12smedicny/InstallAssistant.pkg")
 ventura1331=("Ventura" "13.3.1" "https://swcdn.apple.com/content/downloads/37/35/032-66588-A_P5QIYDIIZL/kkuzd39hnskjm12vimzblklo3drb3majbf/InstallAssistant.pkg")
 ventura133=("Ventura" "13.3" "https://swcdn.apple.com/content/downloads/41/46/002-75541-A_N0W4MFQ0NM/rwkz3k8cd91dvrvddymange3k8004xkt4v/InstallAssistant.pkg")
-ventura1321=("Ventura" "13.2.1" "https://swcdn.apple.com/content/downloads/26/15/032-48342-A_OG2YEE7OSX/8sd3qpy79cimb7cjiy47cytps0gm7m0z5l/InstallAssistant.pkg")
 
 
 
@@ -162,21 +160,19 @@ function downloadInstaller() {
 
     echo
     echo "Ventura:"
-    versionPrinter 1 ventura1331
-    versionPrinter 2 ventura133
-    versionPrinter 3 ventura1321
+    versionPrinter 1 ventura134
+    versionPrinter 2 ventura1331
+    versionPrinter 3 ventura133
 
     echo
     echo "Monterey:"
-    versionPrinter 4 monterey1265
-    versionPrinter 5 monterey1264
-    versionPrinter 6 monterey1263
+    versionPrinter 4 monterey1266
+    versionPrinter 5 monterey1265
+    versionPrinter 6 monterey1264
 
     echo
     echo "Big Sur:"
-    versionPrinter 7 bigsur1175
-    versionPrinter 8 bigsur1174
-    versionPrinter 9 bigsur1173
+    versionPrinter 7 bigsur1177
 
     echo
     echo -e "${GREEN}[CHOICE]: Enter a number (1..9):${NC}"
@@ -186,23 +182,19 @@ function downloadInstaller() {
     case $answer in
     
         "1" ) 
-            arr=ventura1331 ;;
+            arr=ventura134 ;;
         "2" ) 
-            arr=ventura133 ;;
+            arr=ventura1331 ;;
         "3" )
-            arr=ventura1321 ;;    
+            arr=ventura133 ;;    
         "4")
-            arr=monterey1265 ;;
+            arr=monterey1266 ;;
         "5" )
-            arr=monterey1264 ;;
+            arr=monterey1265 ;;
         "6" )
-            arr=monterey1263 ;;
+            arr=monterey1264 ;;
         "7" )
-            arr=bigsur1175 ;;
-        "8" )
-            arr=bigsur1174 ;;
-        "9" )
-            arr=bigsur1173 ;;
+            arr=bigsur1177 ;;
         * )
             echo -e "${RED}[INFO]:${NC} Nothing selected, exiting now ..."
             exit
