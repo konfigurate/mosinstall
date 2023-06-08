@@ -31,6 +31,7 @@ ventura134=("Ventura" "13.4" "https://swcdn.apple.com/content/downloads/63/49/03
 ventura1331=("Ventura" "13.3.1" "https://swcdn.apple.com/content/downloads/37/35/032-66588-A_P5QIYDIIZL/kkuzd39hnskjm12vimzblklo3drb3majbf/InstallAssistant.pkg")
 ventura133=("Ventura" "13.3" "https://swcdn.apple.com/content/downloads/41/46/002-75541-A_N0W4MFQ0NM/rwkz3k8cd91dvrvddymange3k8004xkt4v/InstallAssistant.pkg")
 
+sonoma001=("Sonoma Beta" "14" "https://swcdn.apple.com/content/downloads/23/44/032-94352-A_DB05J15QWT/4x91v0yzolyiat5cat76ieu0h78aeu3d03/InstallAssistant.pkg")
 
 
 #
@@ -175,6 +176,10 @@ function downloadInstaller() {
     versionPrinter 7 bigsur1177
 
     echo
+    echo "Sonoma Dev Beta"
+    versionPrinter X sonoma001
+
+    echo
     echo -e "${GREEN}[CHOICE]: Enter a number (1..9):${NC}"
     read answer < /dev/tty
     echo
@@ -195,6 +200,8 @@ function downloadInstaller() {
             arr=monterey1264 ;;
         "7" )
             arr=bigsur1177 ;;
+        "X" )
+            arr=sonoma001 ;;
         * )
             echo -e "${RED}[INFO]:${NC} Nothing selected, exiting now ..."
             exit
