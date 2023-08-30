@@ -25,7 +25,7 @@ monterey1268=("Monterey" "12.6.8" "https://swcdn.apple.com/content/downloads/50/
 # VENTURA
 # get from https://mrmacintosh.com/macos-ventura-13-full-installer-database-download-directly-from-apple/
 #
-ventura135=("Ventura" "13.5" "https://swcdn.apple.com/content/downloads/01/07/032-69593-A_15V577BH7O/fau3wbhcg9pmo81cgkb2qjp0gfbp1jxu26/InstallAssistant.pkg")
+ventura1351=("Ventura" "13.5.1" "https://swcdn.apple.com/content/downloads/25/45/042-25643-A_KS23W0LI3U/f93qd41yyv7b4a4jmubqoiq89ldcpl6bbp/InstallAssistant.pkg")
 ventura134=("Ventura" "13.4" "https://swcdn.apple.com/content/downloads/63/49/032-84910-A_3SSTBN1HDA/h89vitwfbzt54jcbwpfwkmrn12smedicny/InstallAssistant.pkg")
 
 
@@ -156,7 +156,7 @@ function downloadInstaller() {
 
     echo
     echo "Ventura:"
-    versionPrinter 1 ventura135
+    versionPrinter 1 ventura1351
     versionPrinter 2 ventura134
 
     echo
@@ -175,7 +175,7 @@ function downloadInstaller() {
     case $answer in
     
         "1" ) 
-            arr=ventura135 ;;
+            arr=ventura1351 ;;
         "2" ) 
             arr=ventura134 ;;
         "3" )
