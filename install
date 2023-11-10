@@ -13,7 +13,7 @@
 # MONTEREY
 # get it from https://mrmacintosh.com/macos-12-monterey-full-installer-database-download-directly-from-apple/
 #
-monterey127=("Monterey" "12.7" "https://swcdn.apple.com/content/downloads/15/25/042-55586-A_3K88VDWWUI/sjuqtms3bl3dpjg6ii9i5bjkhihj59qxaj/InstallAssistant.pkg")
+monterey1271=("Monterey" "12.7.1" "https://swcdn.apple.com/content/downloads/45/36/042-82938-A_MYEQ3DT1O2/by641pp6vwoo8w5i75d4e5j3rq3qdf1xe7/InstallAssistant.pkg")
 
 #
 # VENTURA
@@ -155,7 +155,7 @@ function downloadInstaller() {
 
     echo
     echo "Monterey:"
-    versionPrinter 3 monterey127
+    versionPrinter 3 monterey1271
 
     echo
     echo -e "${GREEN}[CHOICE]: Enter a number (1..9):${NC}"
@@ -169,7 +169,7 @@ function downloadInstaller() {
         "2" ) 
             arr=ventura1352 ;;
         "3" )
-            arr=monterey127 ;;
+            arr=monterey1271 ;;
         * )
             echo -e "${RED}[INFO]:${NC} Nothing selected, exiting now ..."
             exit
