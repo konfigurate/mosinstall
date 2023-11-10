@@ -20,7 +20,7 @@ curl -s raw.githubusercontent.com/konfigurate/mosinstall/main/install | bash
 
 - Catalina, Big Sur and Monterey
 
-    Using the Recovery of those three Versions supports the installation of all three Versions:
+    Using the Recovery of those three Versions supports the installation of all two Versions:
 
     - Monterey
     - Ventura
