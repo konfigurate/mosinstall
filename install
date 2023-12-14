@@ -13,14 +13,13 @@
 # MONTEREY
 # get it from https://mrmacintosh.com/macos-12-monterey-full-installer-database-download-directly-from-apple/
 #
-monterey1271=("Monterey" "12.7.1" "https://swcdn.apple.com/content/downloads/45/36/042-82938-A_MYEQ3DT1O2/by641pp6vwoo8w5i75d4e5j3rq3qdf1xe7/InstallAssistant.pkg")
+monterey1272=("Monterey" "12.7.2" "https://swcdn.apple.com/content/downloads/50/04/052-14528-A_IPPECDAUDT/rhoymx9618x6bk4fe7zfijtdgd55t4y2lh/InstallAssistant.pkg")
 
 #
 # VENTURA
 # get from https://mrmacintosh.com/macos-ventura-13-full-installer-database-download-directly-from-apple/
 #
-ventura1361=("Ventura" "13.6.1" "https://swcdn.apple.com/content/downloads/14/43/042-82952-A_GEJ3YDGEVG/cxed0qvmvtdvuix3xskr6zz1o4nc8fwry0/InstallAssistant.pkg")
-ventura136=("Ventura" "13.6" "https://swcdn.apple.com/content/downloads/28/01/042-55926-A_7GZJNO2M4I/asqcyheggme9rflzb3z3pr6vbp0gxyk2eh/InstallAssistant.pkg")
+ventura1363=("Ventura" "13.6.3" "https://swcdn.apple.com/content/downloads/07/61/052-14644-A_IIVDKGU43X/y154jpzssylcv23nftb0f8jiyn10n7v226/InstallAssistant.pkg")
 
 
 #
@@ -150,12 +149,11 @@ function downloadInstaller() {
 
     echo
     echo "Ventura:"
-    versionPrinter 1 ventura1361
-    versionPrinter 2 ventura136
+    versionPrinter 1 ventura1363
 
     echo
     echo "Monterey:"
-    versionPrinter 3 monterey1271
+    versionPrinter 2 monterey1272
 
     echo
     echo -e "${GREEN}[CHOICE]: Enter a number (1..9):${NC}"
@@ -165,11 +163,9 @@ function downloadInstaller() {
     case $answer in
     
         "1" ) 
-            arr=ventura1361 ;;
+            arr=ventura1363 ;;
         "2" ) 
-            arr=ventura136 ;;
-        "3" )
-            arr=monterey1271 ;;
+            rr=monterey1272 ;;
         * )
             echo -e "${RED}[INFO]:${NC} Nothing selected, exiting now ..."
             exit
