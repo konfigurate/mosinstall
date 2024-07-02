@@ -20,7 +20,7 @@
 #
 ventura1365=("Ventura" "13.6.5" "https://swcdn.apple.com/content/downloads/48/39/052-60128-A_RFELEU0YJU/boswcupcvcju2f3hj5fuaww9wbezcdbkbt/InstallAssistant.pkg")
 ventura1366=("Ventura" "13.6.6" "https://swcdn.apple.com/content/downloads/39/23/052-64249-A_9F709WX21B/y8u836xffflrewihfvnacmy3p4v8rm3w57/InstallAssistant.pkg")
-
+ventura1367=("Ventura" "13.6.7" "https://swcdn.apple.com/content/downloads/46/31/052-96247-A_MLN9N00Y8W/dmml3up52hrsb01krjtczmdhexiruv1b5m/InstallAssistant.pkg")
 
 #
 # COLORS
@@ -151,6 +151,7 @@ function downloadInstaller() {
     echo "Ventura:"
     versionPrinter 1 ventura1365
     versionPrinter 2 ventura1366
+    versionPrinter 3 ventura1367
 
 
     echo
@@ -164,6 +165,8 @@ function downloadInstaller() {
             arr=ventura1365 ;;
         "2" ) 
             arr=ventura1366 ;;
+        "3" )
+            arr=ventura1367 ;;
         * )
             echo -e "${RED}[INFO]:${NC} Nothing selected, exiting now ..."
             exit
